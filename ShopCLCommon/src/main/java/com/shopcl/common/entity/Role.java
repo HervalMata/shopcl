@@ -26,6 +26,11 @@ public class Role implements Serializable {
     @Column(length = 150, nullable = false)
     private String description;
 
+    public Role(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
