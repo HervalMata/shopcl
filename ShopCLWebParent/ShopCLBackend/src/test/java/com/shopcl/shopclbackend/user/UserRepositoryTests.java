@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Rollback(value = false)
+@Rollback(value = true)
 public class UserRepositoryTests {
 
     private UserRepository repo;
@@ -28,7 +28,7 @@ public class UserRepositoryTests {
 
     @Test
     public void testCreateNewUserWithOneRole() {
-        Role roleAdmin = entityManager.find(Role.class, 1);
+        Role roleAdmin = entityManager.find(Role.class, 1L);
         User userWithOneRole = new User("y@a.net", "ya2021", "Yagmur", "Aksac");
         userWithOneRole.addRole(roleAdmin);
         User savedUser = repo.save(userWithOneRole);
@@ -69,7 +69,7 @@ public class UserRepositoryTests {
 
     @Test
     public void testUpdateUserRoles() {
-        User userUpdateUserRoles = repo.findById(2L).get();
+        User userUpdateUserRoles = repo.findById(1L).get();
         Role roleEditor = new Role(3L);
         Role roleSalesperson = new Role(2L);
         userUpdateUserRoles.getRoles().remove(roleEditor);
@@ -79,7 +79,7 @@ public class UserRepositoryTests {
 
     @Test
     public void testDeleteUser() {
-        Long userDeleteUser = 2L;
+        Long userDeleteUser = 1L;
         repo.deleteById(userDeleteUser);
     }
 
