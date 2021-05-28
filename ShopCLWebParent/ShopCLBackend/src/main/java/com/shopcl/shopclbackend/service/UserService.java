@@ -77,6 +77,14 @@ public class UserService {
         }
     }
 
+    public void delete(Long id) throws UserNotFoundException {
+        Long countById = userRepository.countById(id);
+        if (countById == null || countById == 0) {
+            throw new UserNotFoundException("Não foi encontrado nenhum usuário com o ID " + id);
+        }
+        userRepository.deleteById(id);
+    }
+
     private void encodePassword(User user) {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
