@@ -85,6 +85,10 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public void updateUserEnabledStatus(Long id, boolean enabled) {
+        userRepository.updateEnabledStatus(id, enabled);
+    }
+
     private void encodePassword(User user) {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
