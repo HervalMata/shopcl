@@ -60,8 +60,11 @@
             <h2>Gerenciar Usuários</h2>
             <a th:href="@{/users/new}">Cadastrar Novo Usuário</a>
         </div>
-        <div th:if="${message != null}" class="alert alert-success text-center">
-            [[${message}]]
+        <div th:if="${messageSuccess != null}" class="alert alert-success text-center">
+            [[${messageSuccess}]]
+        </div>
+        <div th:if="${messageError != null}" class="alert alert-danger text-center">
+            [[${messageError}]]
         </div>
         <div>
             <table class="table table-bordered table-striped table-hover table-responsive-xl">
@@ -90,7 +93,7 @@
                             <a th:if="${user.enabled == false}" class="fas fa-check-circle fa-2x icon-dark" href=""></a>
                         </td>
                         <td>
-                            <a class="fas fa-edit fa-2x icon-green" href=""></a>
+                            <a class="fas fa-edit fa-2x icon-green" th:href="@{'/user/edit/' ${user.id}" title="Editar Usuário"></a>
                             &nbsp;
                             <a class="fas fa-trash fa-2x icon-dark link-delete" href=""></a>
                         </td>
