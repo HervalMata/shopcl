@@ -6,6 +6,9 @@ import com.shopcl.shopclbackend.error.UserNotFoundException;
 import com.shopcl.shopclbackend.repository.RoleRepository;
 import com.shopcl.shopclbackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,8 @@ import java.util.NoSuchElementException;
 @Service
 @Transactional
 public class UserService {
+
+    public static final int USERS_PER_PAGE = 4;
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -88,6 +93,11 @@ public class UserService {
 
     public void updateUserEnabledStatus(Long id, boolean enabled) {
         userRepository.updateEnabledStatus(id, enabled);
+    }
+
+    public Page<User> listByPage(int pageNum) {
+        Pageable pageable = PageRequest.of(pageNum - 1, USERS_PER_PAGE);
+        return userRepository.findAll(pageable);
     }
 
     private void encodePassword(User user) {
