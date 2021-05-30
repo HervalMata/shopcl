@@ -33,7 +33,7 @@ public class UserController {
         return listByPage(1, model);
     }
 
-    @GetMapping("/users/page/{pageNumber}")
+    @GetMapping("/users/page/{pageNum}")
     public String listByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
         Page<User> page = userService.listByPage(pageNum);
         List<User> listUsers = page.getContent();
