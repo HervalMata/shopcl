@@ -36,8 +36,9 @@ public class UserService {
     }
 
     public List<User> listAll() {
+        Sort firstNameSorting = Sort.by("firstName").ascending();
         List<User> userList = new ArrayList<>();
-        userRepository.findAll().forEach(userList::add);
+        userRepository.findAll(firstNameSorting).forEach(userList::add);
         return userList;
     }
 
