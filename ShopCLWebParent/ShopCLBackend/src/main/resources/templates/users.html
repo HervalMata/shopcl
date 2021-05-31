@@ -67,16 +67,28 @@
             [[${messageError}]]
         </div>
         <div>
+            <form th:action="@{/users/page/1}" class="form-inline m-3">
+                <input type="hidden" name="sortField" th:value="${sortField}" />
+                <input type="hidden" name="sortDir" th:value="${sortDir}" />
+                Filtro:&nbsp;
+                <input type="search" name="keyword" th:value="${keyword}" class="form-control" required />
+                &nbsp;&nbsp;
+                <input type="submit" value="Pesquisar" class="btn btn-primary" />
+                &nbsp;&nbsp;
+                <input type="button" value="Limpar" class="btn btn-secondary" onclick="clearFilter()" />
+            </form>
+        </div>
+        <div>
             <table class="table table-bordered table-striped table-hover table-responsive-xl">
                 <thead class="thead-dark">
                     <tr>
                         <th>
                             <a th:if="${sortField != 'id'}" class="text-white"
-                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${sortDir}}">
+                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${sortDir} + ${keyword != null ? '$keyword=' + keyword : ''}}">
                                 ID Usuário
                             </a>
                             <a th:if="${sortField == 'id'}" class="text-white"
-                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">
+                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '$keyword=' + keyword : ''}}">
                                 ID Usuário
                             </a>
                             <span th:if="${sortField == 'id'}"
@@ -85,11 +97,11 @@
                         <th>Foto</th>
                         <th>
                             <a th:if="${sortField != 'email'}" class="text-white"
-                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${sortDir}}">
+                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${sortDir} + ${keyword != null ? '$keyword=' + keyword : ''}}">
                                 Email
                             </a>
                             <a th:if="${sortField == 'email'}" class="text-white"
-                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
+                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir} + ${keyword != null ? '$keyword=' + keyword : ''}}">
                                 Email
                             </a>
                             <span th:if="${sortField == 'email'}"
@@ -97,11 +109,11 @@
                         </th>
                         <th>
                             <a th:if="${sortField != 'firstName'}" class="text-white"
-                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${sortDir}}">
+                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${sortDir} + ${keyword != null ? '$keyword=' + keyword : ''}}">
                                 Nome
                             </a>
                             <a th:if="${sortField == 'firstName'}" class="text-white"
-                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
+                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir} + ${keyword != null ? '$keyword=' + keyword : ''}}">
                                 Nome
                             </a>
                             <span th:if="${sortField == 'firstName'}"
@@ -109,11 +121,11 @@
                         </th>
                         <th>
                             <a th:if="${sortField != 'lastName'}" class="text-white"
-                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${sortDir}}">
+                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${sortDir} + ${keyword != null ? '$keyword=' + keyword : ''}}">
                                 Sobrenome
                             </a>
                             <a th:if="${sortField == 'lastName'}" class="text-white"
-                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">
+                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir} + ${keyword != null ? '$keyword=' + keyword : ''}}">
                                 Sobrenome
                             </a>
                             <span th:if="${sortField == 'lastName'}"
@@ -122,11 +134,11 @@
                         <th>Funções</th>
                         <th>
                             <a th:if="${sortField != 'enabled'}" class="text-white"
-                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=enabled&sortDir=' + ${sortDir}}">
+                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=enabled&sortDir=' + ${sortDir} + ${keyword != null ? '$keyword=' + keyword : ''}}">
                                 Habilitado
                             </a>
                             <a th:if="${sortField == 'enabled'}" class="text-white"
-                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=enabled&sortDir=' + ${reverseSortDir}}">
+                               th:href="@{'/users/page/' + ${currentPage} + '?sortField=enabled&sortDir=' + ${reverseSortDir} + ${keyword != null ? '$keyword=' + keyword : ''}}">
                                 Habilitado
                             </a>
                             <span th:if="${sortField == 'enabled'}"
@@ -182,20 +194,20 @@
             <nav>
                 <ul class="pagination justify-content-center">
                     <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-                        <a class="page-link" th:href="@{'/users/page/1?sortField=' + ${sortField} + '$sortDir=' + ${sortDir}}">Primeiro</a>
+                        <a class="page-link" th:href="@{'/users/page/1?sortField=' + ${sortField} + '$sortDir=' + ${sortDir} + ${keyword != null ? '$keyword=' + keyword : ''}}">Primeiro</a>
                     </li>
                     <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-                        <a class="page-link" th:href="@{'/users/page/' + ${currentPage - 1} + 'sortField='  + ${sortField} + '$sortDir=' + ${sortDir}}">Anterior</a>
+                        <a class="page-link" th:href="@{'/users/page/' + ${currentPage - 1} + 'sortField='  + ${sortField} + '$sortDir=' + ${sortDir} + ${keyword != null ? '$keyword=' + keyword : ''}}">Anterior</a>
                     </li>
                     <li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
                             th:each="i :${#numbers.sequence(1, totalPages)}">
-                        <a class="page-link" th:href="@{'/users/page/' + ${i} + 'sortField='  + ${sortField} + '$sortDir=' + ${sortDir}}">[[${i}]]</a>
+                        <a class="page-link" th:href="@{'/users/page/' + ${i} + 'sortField='  + ${sortField} + '$sortDir=' + ${sortDir} + ${keyword != null ? '$keyword=' + keyword : ''}}">[[${i}]]</a>
                     </li>
                     <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-                        <a class="page-link" th:href="@{'/users/page/' + ${currentPage + 1} + 'sortField='  + ${sortField} + '$sortDir=' + ${sortDir}}">Próximo</a>
+                        <a class="page-link" th:href="@{'/users/page/' + ${currentPage + 1} + 'sortField='  + ${sortField} + '$sortDir=' + ${sortDir} + ${keyword != null ? '$keyword=' + keyword : ''}}">Próximo</a>
                     </li>
                     <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-                        <a class="page-link" th:href="@{'/users/page/' + ${totalPages} + 'sortField='  + ${sortField} + '$sortDir=' + ${sortDir}}">Último</a>
+                        <a class="page-link" th:href="@{'/users/page/' + ${totalPages} + 'sortField='  + ${sortField} + '$sortDir=' + ${sortDir} + ${keyword != null ? '$keyword=' + keyword : ''}}">Último</a>
                     </li>
                 </ul>
             </nav>
@@ -233,6 +245,9 @@
             $("#confirmModal").modal();
         });
     });
+    function clearFilter() {
+        window.location = "[[@{/users]]";
+    }
 </script>
 </body>
 </html>
