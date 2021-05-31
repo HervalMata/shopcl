@@ -4,6 +4,7 @@ import com.shopcl.common.entity.Role;
 import com.shopcl.common.entity.User;
 import com.shopcl.shopclbackend.error.UserNotFoundException;
 import com.shopcl.shopclbackend.service.UserService;
+import com.shopcl.shopclbackend.util.DirectUtil;
 import com.shopcl.shopclbackend.util.FileUploadUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
@@ -89,7 +90,7 @@ public class UserController {
         }
 
         redirectAttributes.addFlashAttribute("message", "O usuário foi salvo com sucesso.");
-        return "redirect:/users";
+        return DirectUtil.getRedirectURLtoAffectedUser(user);
     }
 
     @GetMapping("/users/edit/{id}")
