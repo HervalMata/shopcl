@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 </head>
 <body>
-    <th th:fragment="column_link(fieldName, columnLabel)">
+    <th th:fragment="column_link(fieldName, columnLabel, removeTag)" th:remove="${removeTag}">
         <a class="text-white" th:href="@{'/users/page' + ${currentPage} + '?sortField=id&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
             [[${columnLabel}]]
         </a>
@@ -13,5 +13,24 @@
     </th>
     <a th:fragment="page_link(pageNum, label)" class="page-link"
        th:href="@{'/users/page/${pageNum}?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${label}]]</a>
+
+    <div th:fragment="user_photos" th:remove="tag">
+        <span th:if="${user.photos == null}" class="fas fa-portrait fa-2x icon-silver"></span>
+        <img th:if="${user.photos != null}" th:src="@{${user.photosImagePath}}" style="width: 100px" />
+    </div>
+
+    <div th:fragment="user_status" th:remove="tag">
+        <a th:if="${user.enabled == true}" class="fas fa-check-circle fa-1x icon-green" style="text-decoration: none"
+           th:href="@{'/users/' + ${user.id} + '/enabled/false'}" title="Desabilitar este usuário"></a>
+        <a th:if="${user.enabled == false}" class="fas fa-circle fa-1x icon-dark" style="text-decoration: none"
+           th:href="@{'/users/' + ${user.id} + '/enabled/true'}" title="Habilitar este usuário"></a>
+    </div>
+
+    <div th:fragment="user_actions" th:remove="tag">
+        <a class="fas fa-edit fa-1x icon-green" style="text-decoration: none"
+           th:href="@{'/users/edit/' + ${user.id}}" title="Editar este usuário"></a>
+        <a class="fas fa-trash fa-1x icon-dark link-delete"
+           th:href="@{'/users/delete/' + ${user.id}}" th:user="${user.id}" title="Remover este usuário"></a>
+    </div>
 </body>
 </html>
