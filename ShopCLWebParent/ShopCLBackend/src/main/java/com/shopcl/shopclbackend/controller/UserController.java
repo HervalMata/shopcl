@@ -4,10 +4,7 @@ import com.shopcl.common.entity.Role;
 import com.shopcl.common.entity.User;
 import com.shopcl.shopclbackend.error.UserNotFoundException;
 import com.shopcl.shopclbackend.service.UserService;
-import com.shopcl.shopclbackend.util.DirectUtil;
-import com.shopcl.shopclbackend.util.FileUploadUtil;
-import com.shopcl.shopclbackend.util.UserCsvExporter;
-import com.shopcl.shopclbackend.util.UserExcelExporter;
+import com.shopcl.shopclbackend.util.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -146,6 +143,13 @@ public class UserController {
     public void exportToExcel(HttpServletResponse response) throws IOException {
         List<User> listUsers = userService.listAll();
         UserExcelExporter exporter = new UserExcelExporter();
+        exporter.export(listUsers, response);
+    }
+
+    @GetMapping("/users/export/pdf")
+    public void exportToPDF(HttpServletResponse response) throws IOException {
+        List<User> listUsers = userService.listAll();
+        UserPdfExporter exporter = new UserPdfExporter();
         exporter.export(listUsers, response);
     }
 }
