@@ -10,13 +10,13 @@
     div.less-details { display: block}
 }
 
-@media screen and (max-width: 768px) and (max-width: 1024px){
+@media screen and (min-width: 768px) and (max-width: 1024px){
     div.full-details { display: block }
     div.less-details { display: none }
     .hideable-column { display: none }
 }
 
-@media screen and (max-width: 1024px){
+@media screen and (min-width: 1024px){
     div.less-details { display: none }
     .hideable-column { display: table-cell }
 }
