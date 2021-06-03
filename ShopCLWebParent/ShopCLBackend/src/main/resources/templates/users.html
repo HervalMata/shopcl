@@ -151,14 +151,14 @@
                         <a th:replace="fragments :: page_link(1, 'Primeiro')"></a>
                     </li>
                     <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-                        <a th:replace="fragments :: page_link(currentPage - 1, 'Anterior')"></a>
+                        <a th:replace="fragments :: page_link(${currentPage - 1}, 'Anterior')"></a>
                     </li>
                     <li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
                             th:each="i :${#numbers.sequence(1, totalPages)}">
                         <a th:replace="fragments :: page_link(${i}, ${i})"></a>
                     </li>
                     <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-                        <a th:replace="fragments :: page_link(currentPage + 1, 'Próximo')"></a>
+                        <a th:replace="fragments :: page_link(${currentPage + 1}, 'Próximo')"></a>
                     </li>
                     <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
                         <a th:replace="fragments :: page_link(totalPages, 'Último')"></a>
