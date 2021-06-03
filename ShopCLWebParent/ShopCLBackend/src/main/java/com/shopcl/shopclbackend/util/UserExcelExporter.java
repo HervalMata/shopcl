@@ -16,7 +16,11 @@ public class UserExcelExporter extends AbstractExporter {
     public UserExcelExporter(XSSFWorkbook workbook) {
         this.workbook = workbook;
     }
-    
+
+    public UserExcelExporter() {
+
+    }
+
     private void writeHeaderLine() {
         sheet = workbook.createSheet("Usuários");
         XSSFRow row = sheet.createRow(0);
