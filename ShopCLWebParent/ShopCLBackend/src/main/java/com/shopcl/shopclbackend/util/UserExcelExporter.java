@@ -47,7 +47,7 @@ public class UserExcelExporter extends AbstractExporter {
         cell.setCellStyle(cellStyle);
     }
 
-    public void exporter(List<User> listUsers, HttpServletResponse response) throws IOException {
+    public void export(List<User> listUsers, HttpServletResponse response) throws IOException {
         super.setResponseHeader(response, "application/octet-stream", ".xlsx");
         writeHeaderLine();
         writeDataLines(listUsers);
