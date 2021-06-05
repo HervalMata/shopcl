@@ -5,6 +5,7 @@ import com.shopcl.common.entity.User;
 import com.shopcl.shopclbackend.error.UserNotFoundException;
 import com.shopcl.shopclbackend.repository.RoleRepository;
 import com.shopcl.shopclbackend.repository.UserRepository;
+import com.shopcl.shopclbackend.service.impl.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +21,7 @@ import java.util.NoSuchElementException;
 
 @Service
 @Transactional
-public class UserService {
+public class UserService implements IUserService {
 
     public static final int USERS_PER_PAGE = 4;
 
