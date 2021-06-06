@@ -6,7 +6,10 @@
     <div class="container">
         <div th:replace="navigation :: menu"></div>
         <div>
-            <h1>Bemvindo ao Painél de Controle do Admin do ShopCL</h1>
+            <h1>Bemvindo
+                <a th:href="@{/account}" sec:authentication="principal.fullname"></a>
+                <span sec:authentication="principal.authorities"></span>
+                ao Painél de Controle do Admin do ShopCL</h1>
         </div>
         <div th:replace="fragments :: footer"></div>
     </div>
