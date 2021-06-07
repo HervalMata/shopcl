@@ -1,10 +1,9 @@
 package com.shopcl.common.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,10 +12,14 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class User {
+@ToString
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
     @Column(length = 128, nullable = false, unique = true)
@@ -53,17 +56,6 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", roles=" + roles +
-                '}';
     }
 
     @Transient
