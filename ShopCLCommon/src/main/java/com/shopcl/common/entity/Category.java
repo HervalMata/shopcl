@@ -32,4 +32,14 @@ public class Category implements Serializable {
     private String image;
 
     private boolean enabled;
+
+    public Category(Long id) {
+        this.id = id;
+    }
+
+    public Category(String name) {
+        this.name = name;
+        this.alias = name;
+        this.image = "default.png";
+    }
 }
