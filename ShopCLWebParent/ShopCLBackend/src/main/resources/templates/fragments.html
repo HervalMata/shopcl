@@ -40,6 +40,21 @@
         <a class="fas fa-trash fa-1x icon-dark link-delete"
            th:href="@{'/users/delete/' + ${user.id}}" th:user="${user.id}" title="Remover este usuário"></a>
     </div>
+
+    <th th:fragment="category_status" th:remove="tag">
+        <a th:if="${cat.enabled == true}" class="fas fa-check-circle fa-1x icon-green" style="text-decoration: none"
+           th:href="@{'/categories/' + ${cat.id} + '/enabled/false'}" title="Desabilitar esta categoria"></a>
+        <a th:if="${cat.enabled == false}" class="fas fa-circle fa-1x icon-dark" style="text-decoration: none"
+           th:href="@{'/categories/' + ${cat.id} + '/enabled/true'}" title="Habilitar esta categoria"></a>
+    </th>
+
+    <div th:fragment="categories_actions" th:remove="tag">
+        <a class="fas fa-edit fa-1x icon-green" style="text-decoration: none"
+           th:href="@{'/categories/edit/' + ${cat.id}}" title="Editar esta categoria"></a>
+        <a class="fas fa-trash fa-1x icon-dark link-delete"
+           th:href="@{'/categories/delete/' + ${cat.id}}" th:catId="${cat.id}" title="Remover esta categoria"></a>
+    </div>
+
     <div th:fragment="footer" class="text-center m-3">
         <p>ShopCL Administração - Copyright &copy; ShopCL</p>
     </div>
