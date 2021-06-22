@@ -25,4 +25,14 @@ public class CategoryService implements ICategoryService {
         categoryRepository.findAll().forEach(categoryList::add);
         return categoryList;
     }
+
+    @Override
+    public List<Category> listCategoriesUsedInForm() {
+        List<Category> categoriesUsedInForm = new ArrayList<>();
+        Iterable<Category> categoriesInDB = categoryRepository.findAll();
+        for (Category category : categoriesInDB) {
+            categoriesUsedInForm.add(new Category(category.getName()));
+        }
+        return categoriesUsedInForm;
+    }
 }
