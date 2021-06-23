@@ -53,11 +53,16 @@ public class CategoryController {
 
     @PostMapping("/categories/save")
     public String saveCategory(Category category, @RequestParam("fileImage")MultipartFile multipartFile, RedirectAttributes redirectAttributes) throws IOException {
+        LOGGER.info("CategoryController | saveCategory is started");
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        LOGGER.info("CategoryController | saveCategory | fileName : " + fileName);
         category.setImage(fileName);
         Category savedCategory = categoryService.save(category);
         String uploadDir = "../category-images/" + savedCategory.getId();
+        LOGGER.info("CategoryController | saveCategory | savedCategory : " + savedCategory.toString());
+        LOGGER.info("CategoryController | saveCategory | uploadDir : " + uploadDir);
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        LOGGER.info("CategoryController | saveCategory | category.getImage()() : " + category.getImage());
         redirectAttributes.addFlashAttribute("message", "A categoria foi salva com sucesso.");
         return "redirect:/categories";
     }
