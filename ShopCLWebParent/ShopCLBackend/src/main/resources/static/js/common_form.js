@@ -4,7 +4,7 @@ $(document).ready(function () {
     });
     $("#fileImage").change(function () {
         fileSize = this.files[0].size;
-        if (fileSize > 1048576) {
+        if (fileSize > 102400) {
             this.setCustomValidity("Você deve escolher uma imagem menor que 1MB!");
             this.reportValidity();
         } else {
