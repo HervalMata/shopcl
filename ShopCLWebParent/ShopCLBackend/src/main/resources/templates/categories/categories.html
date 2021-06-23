@@ -12,7 +12,7 @@
             <a th:href="@{/categories/export/pdf}" style="text-decoration: none" class="fas fa-file-pdf fa-1x icon-dark mr-2"></a>
         </div>
         <div th:if="${messageSuccess != null}" class="alert alert-success text-center">
-            [[${message}]]
+            [[${messageSuccess}]]
         </div>
         <div>
             <form th:action="@{/categories/page/1}" class="form-inline m-3">
@@ -46,7 +46,10 @@
                 <tbody>
                     <tr th:each="cat : ${listCategories}">
                         <td>[[${cat.id}]]</td>
-                        <td></td>
+                        <td>
+                            <span th:if="${cat.imagePath == null}" class="fas fa-folder fa-1x icon-silver"></span>
+                            <span th:if="${cat.imagePath != null}" th:src="@{${cat.imagePath}}" style="width: 100px" class="img-fluid"></span>
+                        </td>
                         <td>[[${cat.name}]]</td>
                         <td>[[${cat.alias}]]</td>
                         <td>
