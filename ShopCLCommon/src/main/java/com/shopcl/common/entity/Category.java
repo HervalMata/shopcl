@@ -56,4 +56,25 @@ public class Category implements Serializable {
         copyCategory.setName(name);
         return copyCategory;
     }
+
+    public static Category copyFull(Category category) {
+        Category copyCategory = new Category();
+        copyCategory.setId(category.getId());
+        copyCategory.setName(category.getName());
+        copyCategory.setAlias(category.getAlias());
+        copyCategory.setImage(category.getImage());
+        copyCategory.setEnabled(category.isEnabled());
+        return copyCategory;
+    }
+
+    public static Category copyFull(Category category, String name) {
+        Category copyCategory = Category.copyFull(category);
+        copyCategory.setName(name);
+        return copyCategory;
+    }
+
+    @Transient
+    public String getImagePath() {
+        return "/category-images/" + this.id + "/" + this.image;
+    }
 }
