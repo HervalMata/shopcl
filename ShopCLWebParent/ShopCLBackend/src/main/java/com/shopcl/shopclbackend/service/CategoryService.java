@@ -1,6 +1,7 @@
 package com.shopcl.shopclbackend.service;
 
 import com.shopcl.common.entity.Category;
+import com.shopcl.shopclbackend.error.CategoryNotFoundException;
 import com.shopcl.shopclbackend.repository.CategoryRepository;
 import com.shopcl.shopclbackend.service.impl.ICategoryService;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @Transactional
@@ -39,6 +41,16 @@ public class CategoryService implements ICategoryService {
     @Override
     public Category save(Category category) {
         return categoryRepository.save(category);
+    }
+
+    @Override
+    public Category get(Long id) throws CategoryNotFoundException {
+        try {
+            return categoryRepository.findById(id).get();
+        } catch (NoSuchElementException ex) {
+            throw new CategoryNotFoundException("Não foi possível encontrar uma categoria com ID " + id);
+        }
+
     }
 
 

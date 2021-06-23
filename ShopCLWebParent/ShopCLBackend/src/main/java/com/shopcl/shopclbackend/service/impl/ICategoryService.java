@@ -1,6 +1,7 @@
 package com.shopcl.shopclbackend.service.impl;
 
 import com.shopcl.common.entity.Category;
+import com.shopcl.shopclbackend.error.CategoryNotFoundException;
 
 import java.util.List;
 
