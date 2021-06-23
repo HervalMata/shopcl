@@ -36,7 +36,12 @@ public class CategoryController {
     @GetMapping("/categories/new")
     public String newCategory(Model model) {
         LOGGER.info("CategoryController | newCategory is started");
-        return null;
+        List<Category> listCategories = categoryService.listCategoriesUsedInForm();
+        model.addAttribute("category", new Category());
+        model.addAttribute("listCategories", listCategories);
+        model.addAttribute("pageTitle", "Cadastrar Nova Categoria");
+        LOGGER.info("CategoryController | newCategory | listCategories : " + listCategories.toString());
+        return "categories/category_form";
     }
 
     @GetMapping("/categories/export/csv")
