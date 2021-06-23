@@ -42,4 +42,18 @@ public class Category implements Serializable {
         this.alias = name;
         this.image = "default.png";
     }
+
+    public static Category copyIdAndName(Category category) {
+        Category copyCategory = new Category();
+        copyCategory.setId(category.getId());
+        copyCategory.setName(category.getName());
+        return copyCategory;
+    }
+
+    public static Category copyIdAndName(Long id, String name) {
+        Category copyCategory = new Category();
+        copyCategory.setId(id);
+        copyCategory.setName(name);
+        return copyCategory;
+    }
 }
